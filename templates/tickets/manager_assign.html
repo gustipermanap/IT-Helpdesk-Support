@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Assign</title>
+</head>
+
+<body>
+  <h2>Assign Ticket: {{ ticket.ticket_id }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% if support_staff and support_staff|length > 0 %}
+    <select name="support_id">
+      {% for s in support_staff %}
+      <option value="{{ s.id }}">{{ s.username }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Assign</button>
+    {% else %}
+    <p><em>No support staff found. Create a support user and add them to the "Support" group.</em></p>
+    {% endif %}
+  </form>
+</body>
+
+</html>
